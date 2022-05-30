@@ -15,7 +15,7 @@ class CreateClientUseCase {
     })
 
     if (clientExists) {
-      throw new Error('Client already exists!')
+      throw new AppError('Client already exists!', 404)
     }
 
     const passwordHash = await hash(password, 10)

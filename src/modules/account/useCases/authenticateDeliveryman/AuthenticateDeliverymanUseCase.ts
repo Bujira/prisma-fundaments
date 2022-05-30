@@ -4,26 +4,26 @@ import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 import { IAuthenticateUserDTO } from "../../dtos/IAuthenticateUserDTO";
 
-class AuthenticateClientUseCase {
+class AuthenticateDeliverymanUseCase {
   async execute({ username, password }: IAuthenticateUserDTO) {
-    const client = await prisma.client.findUnique({
+    const deliveryman = await prisma.deliveryman.findUnique({
       where: {
         username
       }
     })
 
-    if (!client) {
+    if (!deliveryman) {
       throw new AppError('Invalid username or password!')
     }
 
-    const passwordMatch = await compare(password, client.password)
+    const passwordMatch = await compare(password, deliveryman.password)
 
     if (!passwordMatch) {
       throw new AppError('Invalid username or password!')
     }
 
-    const token = sign({ username }, String(process.env.TOKEN_CLIENT_SECRET_KEY), {
-      subject: client.id,
+    const token = sign({ username }, String(process.env.TOKEN_DELIVERYMAN_SECRET_KEY), {
+      subject: deliveryman.id,
       expiresIn: '1d'
     })
 
@@ -31,4 +31,4 @@ class AuthenticateClientUseCase {
   }
 }
 
-export { AuthenticateClientUseCase }
+export { AuthenticateDeliverymanUseCase }

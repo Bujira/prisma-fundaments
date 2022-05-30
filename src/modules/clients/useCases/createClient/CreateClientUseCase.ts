@@ -4,8 +4,6 @@ import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 import { ICreateClientDTO } from "../../dtos/ICreateClientDTO";
 
-
-
 class CreateClientUseCase {
   async execute({ username, password }: ICreateClientDTO) {
     const clientExists = await prisma.client.findUnique({
@@ -15,7 +13,7 @@ class CreateClientUseCase {
     })
 
     if (clientExists) {
-      throw new AppError('Client already exists!', 404)
+      throw new AppError('Client already exists!')
     }
 
     const passwordHash = await hash(password, 10)

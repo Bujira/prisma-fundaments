@@ -7,14 +7,14 @@ class CreateClientController {
 
     const createclientUseCase = new CreateClientUseCase()
 
-    const result = await createclientUseCase.execute({
+    const client = await createclientUseCase.execute({
       username,
       password,
     })
 
     return response.status(201).json({
       message: 'Success!',
-      result
+      client
     })
   }
 }

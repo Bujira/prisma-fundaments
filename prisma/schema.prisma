@@ -34,17 +34,17 @@ model Client {
 }
 
 model Delivery {
-  id            String      @id @default(uuid())
+  id            String       @id @default(uuid())
   item          String
-  deliveredAt   DateTime
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime?   @default(now())
-  deleted       Boolean?    @default(false)
+  deliveredAt   DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime?    @default(now())
+  deleted       Boolean?     @default(false)
   deletedAt     DateTime?
-  client        Client      @relation(fields: [clientId], references: [id])
-  deliveryman   Deliveryman @relation(fields: [deliverymanId], references: [id])
+  client        Client       @relation(fields: [clientId], references: [id])
+  deliveryman   Deliveryman? @relation(fields: [deliverymanId], references: [id])
   clientId      String
-  deliverymanId String
+  deliverymanId String?
 
   @@map("delivery")
 }

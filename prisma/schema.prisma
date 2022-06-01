@@ -11,6 +11,7 @@ model Deliveryman {
   id        String    @id @default(uuid())
   username  String    @unique
   password  String
+  busy      Boolean?  @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @default(now())
   deleted   Boolean?  @default(false)

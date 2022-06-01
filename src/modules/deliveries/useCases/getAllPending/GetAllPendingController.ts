@@ -7,14 +7,14 @@ class GetAllPendingController {
 
     const getAllPendingUseCase = new GetAllPendingUseCase()
 
-    const deliveries = await getAllPendingUseCase.execute({
+    const result = await getAllPendingUseCase.execute({
       page: Number(page),
       perPage: Number(perPage),
     } as IGetAllPendingDTO)
 
     return response.status(200).json({
       messsage: 'Success!',
-      deliveries,
+      result,
     })
   }
 }

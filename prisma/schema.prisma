@@ -17,7 +17,7 @@ model Deliveryman {
   deleted   Boolean?  @default(false)
   deletedAt DateTime?
 
-  Delivery Delivery[]
+  delivery Delivery[]
   @@map("deliveryman")
 }
 
@@ -30,7 +30,7 @@ model Client {
   deleted   Boolean?  @default(false)
   deletedAt DateTime?
 
-  Delivery Delivery[]
+  delivery Delivery[]
   @@map("client")
 }
 

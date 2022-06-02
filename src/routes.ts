@@ -7,6 +7,7 @@ import { CreateClientController } from "./modules/clients/useCases/createClient/
 import { GetAllClientDeliveriesController } from "./modules/clients/useCases/getAllClientDeliveries/GetAllClientDeliveriesController";
 import { CreateDeliveryController } from "./modules/deliveries/useCases/createDelivery/CreateDeliveryController";
 import { GetAllPendingController } from "./modules/deliveries/useCases/getAllPending/GetAllPendingController";
+import { UpdateDeliveredController } from "./modules/deliveries/useCases/updateDelivered/UpdateDeliveredController";
 import { UpdateDeliverymanController } from "./modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanController";
 import { CreateDeliverymanController } from "./modules/deliverymen/useCases/createDeliveryman/CreateDeliverymanController";
 import { GetAllDeliverymanDeliveriesController } from "./modules/deliverymen/useCases/getAllDeliverymanDeliveries/GetAllDeliverymanDeliveriesController";
@@ -25,6 +26,7 @@ const getAllDeliverymanDeliveriesController = new GetAllDeliverymanDeliveriesCon
 const createDeliveryController = new CreateDeliveryController()
 const getAllPendingController = new GetAllPendingController()
 const updateDeliverymanController = new UpdateDeliverymanController()
+const updateDeliveredController = new UpdateDeliveredController()
 
 routes.post('/authenticate/client', authenticateClientController.handle)
 routes.post('/authenticate/deliveryman', authenticateDeliverymanController.handle)
@@ -37,6 +39,7 @@ routes.get('/deliveryman/', ensureDeliverymanAuthenticated, getAllDeliverymanDel
 
 routes.post('/delivery/', ensureClientAuthenticated, createDeliveryController.handle)
 routes.get('/delivery/', ensureDeliverymanAuthenticated, getAllPendingController.handle)
-routes.put('/delivery/', ensureDeliverymanAuthenticated, updateDeliverymanController.handle)
+routes.put('/delivery/set-deliveryman', ensureDeliverymanAuthenticated, updateDeliverymanController.handle)
+routes.put('/delivery/order-delivered', ensureDeliverymanAuthenticated, updateDeliveredController.handle)
 
 export { routes }

@@ -7,9 +7,12 @@ import { ICreateClientDTO } from "../../dtos/ICreateClientDTO";
 
 class CreateClientUseCase {
   async execute({ username, password }: ICreateClientDTO): Promise<Client> {
-    const clientExists = await prisma.client.findUnique({
+    const clientExists = await prisma.client.findFirst({
       where: {
-        username
+        username: {
+          equals: username,
+          mode: 'insensitive',
+        },
       }
     })
 

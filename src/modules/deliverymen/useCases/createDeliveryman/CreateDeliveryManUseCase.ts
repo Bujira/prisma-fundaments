@@ -6,9 +6,12 @@ import { ICreateDeliverymanDTO } from "../../dtos/ICreateDeliverymanDTO";
 
 class CreateDeliverymanUseCase {
   async execute({ username, password }: ICreateDeliverymanDTO): Promise<Deliveryman> {
-    const deliverymanExists = await prisma.deliveryman.findUnique({
+    const deliverymanExists = await prisma.deliveryman.findFirst({
       where: {
-        username
+        username: {
+          equals: username,
+          mode: 'insensitive',
+        },
       }
     })
 

@@ -1,10 +1,14 @@
 import { Delivery } from "@prisma/client";
 
+type DeliveryResponse = Omit<Delivery,
+  'deleted' |
+  'deletedAt'
+>
 interface IGetAllClientDeliveriesResponse {
-  deliveries: Delivery[];
+  deliveries: DeliveryResponse[];
   currentPage?: number;
   totalPages?: number;
   total: number;
 }
 
-export { IGetAllClientDeliveriesResponse }
+export { Delivery, IGetAllClientDeliveriesResponse }

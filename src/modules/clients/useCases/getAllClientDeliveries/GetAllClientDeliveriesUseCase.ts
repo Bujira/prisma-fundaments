@@ -16,6 +16,15 @@ class GetAllClientDeliveriesUseCase {
         take: (page && perPage) ? perPage : 10,
         orderBy: {
           createdAt: 'asc'
+        },
+        select: {
+          id: true,
+          item: true,
+          deliveredAt: true,
+          createdAt: true,
+          updatedAt: true,
+          clientId: true,
+          deliverymanId: true,
         }
       }),
       prisma.delivery.count({
